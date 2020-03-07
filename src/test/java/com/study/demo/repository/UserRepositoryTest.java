@@ -3,9 +3,14 @@ package com.study.demo.repository;
 import com.study.demo.DemoApplication;
 import com.study.demo.DemoApplicationTests;
 import com.study.demo.model.entity.User;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.AssertionsKt;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import javax.transaction.Transactional;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
@@ -56,7 +61,20 @@ public class UserRepositoryTest extends DemoApplicationTests {
         });
     }
 
+    @Test
+    @Transactional // method들은 모두 실행되지만 데이터 베이스에서 실제로 삭제가 이루어지진 않음(다시 rollback)
     public void delete(){
+        Optional<User> user = userRepository.findById(2L);
 
+        Assertions.assertTrue(user.isPresent()); // true
+
+
+        user.ifPresent((selectedUser ->{
+            userRepository.delete(selectedUser);
+        }));
+
+        Optional<User> deletedUser = userRepository.findById(2L);
+
+        Assertions.assertFalse(deletedUser.isPresent());
     }
 }
