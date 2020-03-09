@@ -2,6 +2,7 @@ package com.study.demo.repository;
 
 import com.study.demo.DemoApplication;
 import com.study.demo.DemoApplicationTests;
+import com.study.demo.model.entity.Item;
 import com.study.demo.model.entity.User;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AssertionsKt;
@@ -36,12 +37,18 @@ public class UserRepositoryTest extends DemoApplicationTests {
     }
 
     @Test
+    @Transactional
     public void read(){
-        Optional<User> user = userRepository.findById(2L);
+
+        // select * from user where id = 1L
+        Optional<User> user = userRepository.findByAccount("TestUser02");
 
         user.ifPresent(selectedUser ->{
-            System.out.println(("user: "+selectedUser));
-            System.out.println("email : "+selectedUser.getEmail());
+
+            selectedUser.getOrderDetailList().stream().forEach(detail ->{
+                Item item = detail.getItem();
+                System.out.println(detail.getItem());
+            });
         });
 
 
