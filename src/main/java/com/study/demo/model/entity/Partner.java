@@ -9,27 +9,29 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
-@Data
-@NoArgsConstructor
 @AllArgsConstructor
-@Entity // = Table과 동일
-@ToString(exclude = {"orderGroup"})
-//@Table(name = "user") -> DB Table의 이름이 클래스이름과 동일하다면 써주지 않아도 Mapping 됨.
-public class User {
-
+@NoArgsConstructor
+@Data
+@Entity
+@ToString(exclude = {"itemList", "category"})
+public class Partner {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String account;
-
-    private String password;
+    private String name;
 
     private String status;
 
-    private String email;
+    private String address;
 
-    private String phoneNumber; // 자바에서는 camelcase, DB에서는 snakecase
+    private String callCenter;
+
+    private String partnerNumber;
+
+    private String businessNumber;
+
+    private String ceoName;
 
     private LocalDateTime registeredAt;
 
@@ -43,9 +45,12 @@ public class User {
 
     private String updatedBy;
 
-    // User 1 : N OrderGroups
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "user")
-    private List<OrderGroup> orderGroup;
+    // Partner N : 1 Category
 
+    @ManyToOne
+    private Category category;
 
+    // Partner 1 : N Item
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "partner")
+    private List<Item> itemList;
 }

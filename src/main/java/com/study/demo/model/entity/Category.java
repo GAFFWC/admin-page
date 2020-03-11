@@ -6,41 +6,28 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import javax.persistence.*;
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity // order_detail
-@ToString(exclude = {"orderGroup", "item"})
-public class OrderDetail {
-
+@Data
+@Entity
+@ToString(exclude = {"partnerList"})
+public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String status;
-
-    private LocalDateTime arrivalDate;
-
-    private Integer quantity;
-
-    private BigDecimal totalPrice;
-
+    private String type;
+    private String title;
     private LocalDateTime createdAt;
 
     private String createdBy;
-
     private LocalDateTime updatedAt;
-
     private String updatedBy;
 
-    // OrderDetail N : 1 Item
-    @ManyToOne
-    private Item item;
-
-    // OrderDetail N : 1 OrderGroup
-    @ManyToOne
-    private OrderGroup orderGroup; // OneToMany의 mappedby와 일치해야함
+    // Category 1 : N Partner
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
+    private List<Partner> partnerList;
 }
