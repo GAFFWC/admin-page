@@ -36,11 +36,11 @@ public class UserRepositoryTest extends DemoApplicationTests {
         System.out.println("newUser : "+newUser);
         */
 
-        String account = "Test01";
-        String password = "Test01";
+        String account = "Test03";
+        String password = "Test03";
         String status = "REGISTERED";
         String email = "Test01@gmail.com";
-        String phoneNumber = "010-1111-2222";
+        String phoneNumber = "010-1111-3333";
         LocalDateTime registeredAt = LocalDateTime.now();
         LocalDateTime createdAt = LocalDateTime.now();
         String createdBy = "AdminServer";
@@ -52,9 +52,18 @@ public class UserRepositoryTest extends DemoApplicationTests {
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);
-        user.setCreatedAt(createdAt);
-        user.setCreatedBy(createdBy);
+        //user.setCreatedAt(createdAt); // auditor 적용 후 주석
+        //user.setCreatedBy(createdBy); // auditor 적용 후 주석
 
+
+        /*
+        User u = User.builder()
+                .account(account)
+                .password(password)
+                .status(status)
+                .email(email)
+                .build(); // Lombok builder에서 원하는 변수만 입력해서 instance 생성 가능
+         */
         User newUser = userRepository.save(user);
 
         Assertions.assertNotNull(newUser);
@@ -76,6 +85,12 @@ public class UserRepositoryTest extends DemoApplicationTests {
         });*/
 
         Optional<User> user =  userRepository.findFirstByPhoneNumberOrderByIdDesc("010-1111-2222");
+
+        /*
+        user.ifPresent(u ->{
+            u.setEmail("").setPhoneNumber("").setStatus(""); // Accesor 사용 (chaining update)
+        });
+        */
         Assertions.assertNotNull(user);
         user.ifPresent(u ->{
             u.getOrderGroup().stream().forEach(orderGroup -> {
