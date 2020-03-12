@@ -1,6 +1,7 @@
 package com.study.demo.controller;
 
 import com.study.demo.model.SearchParam;
+import com.study.demo.model.network.Header;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -33,5 +34,12 @@ public class GetController {
 
         // { "account" : "", "email" : "", "page" : 0} 원래는 json형태로 전달받음
         return searchParam;
+    }
+
+    @GetMapping("/header")
+    public Header getHeader(){
+
+        // {"resultCode: "OK", "description": "OK"}
+        return Header.builder().resultCode("OK").description("OK").build();
     }
 }
