@@ -6,11 +6,11 @@ import com.study.demo.model.network.response.UserApiResponse;
 
 public interface CrudInterface<Req, Res> { // generic으로 수정하여 여러 api controller를 같은 형식으로 만들수 있도록
 
-    Header<Res> create(Req request); // todo request object 추가
+    Header<Res> create(Header<Req> request); // todo request object 추가
 
     Header<Res> read(Long id);
 
-    Header<Res> update(Req request);
+    Header<Res> update(Header<Req> request);
 
     Header delete(Long id);
 }
