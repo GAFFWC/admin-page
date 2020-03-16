@@ -78,11 +78,10 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
 
         Optional<Item> optional = itemRepository.findById(id);
 
-        optional.map(item ->{
+        return optional.map(item ->{
             itemRepository.delete(item);
             return Header.OK();
         }).orElseGet(()->Header.ERROR("데이터 업음"));
-        return null;
     }
 
     private Header<ItemApiResponse> response(Item item) {
