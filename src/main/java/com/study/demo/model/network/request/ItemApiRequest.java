@@ -1,5 +1,6 @@
 package com.study.demo.model.network.request;
 
+import com.study.demo.model.enumclass.ItemStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -17,7 +18,7 @@ public class ItemApiRequest {
 
     private Long id;
 
-    private String status;
+    private ItemStatus status;
 
     private String name;
 

@@ -2,6 +2,7 @@ package com.study.demo.service;
 
 import com.study.demo.ifs.CrudInterface;
 import com.study.demo.model.entity.User;
+import com.study.demo.model.enumclass.UserStatus;
 import com.study.demo.model.network.Header;
 import com.study.demo.model.network.request.UserApiRequest;
 import com.study.demo.model.network.response.UserApiResponse;
@@ -34,7 +35,7 @@ public class UserApiLogicService implements CrudInterface<UserApiRequest, UserAp
         User user = User.builder()
                 .account(userApiRequest.getAccount())
                 .password(userApiRequest.getPassword())
-                .status("REGISTERED")
+                .status(UserStatus.REGISTERED) // enum이 필요한 부분
                 .phoneNumber(userApiRequest.getPhoneNumber())
                 .email(userApiRequest.getEmail())
                 .registeredAt(LocalDateTime.now())

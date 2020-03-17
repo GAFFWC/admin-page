@@ -1,5 +1,6 @@
 package com.study.demo.model.entity;
 
+import com.study.demo.model.enumclass.UserStatus;
 import lombok.*;
 import lombok.experimental.Accessors;
 import org.springframework.data.annotation.CreatedBy;
@@ -31,7 +32,8 @@ public class User {
 
     private String password;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private UserStatus status; // RESISTERED / UNREGISTERED / WAITING
 
     private String email;
 

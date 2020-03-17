@@ -1,5 +1,6 @@
 package com.study.demo.model.entity;
 
+import com.study.demo.model.enumclass.ItemStatus;
 import jdk.jfr.Enabled;
 import lombok.*;
 import lombok.experimental.Accessors;
@@ -28,7 +29,8 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private ItemStatus status; // 등록 / 해지 / 등록대기중(검수중)
 
     private String name;
 

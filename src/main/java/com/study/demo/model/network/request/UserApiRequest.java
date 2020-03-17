@@ -1,5 +1,6 @@
 package com.study.demo.model.network.request;
 
+import com.study.demo.model.enumclass.UserStatus;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -19,7 +20,7 @@ public class UserApiRequest {
 
     private String password;
 
-    private String status;
+    private UserStatus status;
 
     private String email;
 
