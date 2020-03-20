@@ -4,6 +4,7 @@ import com.study.demo.DemoApplication;
 import com.study.demo.DemoApplicationTests;
 import com.study.demo.model.entity.Item;
 import com.study.demo.model.entity.User;
+import com.study.demo.model.enumclass.UserStatus;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.AssertionsKt;
 import org.junit.jupiter.api.Test;
@@ -48,7 +49,7 @@ public class UserRepositoryTest extends DemoApplicationTests {
         User user = new User();
         user.setAccount(account);
         user.setPassword(password);
-        user.setStatus(status);
+        user.setStatus(UserStatus.REGISTERED);
         user.setEmail(email);
         user.setPhoneNumber(phoneNumber);
         user.setRegisteredAt(registeredAt);

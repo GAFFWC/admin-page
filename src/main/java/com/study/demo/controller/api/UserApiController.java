@@ -7,7 +7,14 @@ import com.study.demo.model.network.response.UserApiResponse;
 import com.study.demo.service.UserApiLogicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j // simple logging (디버그용 로그 생성)
 @RestController
@@ -17,6 +24,7 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
 
     @Autowired
     private UserApiLogicService userApiLogicService;
+
 
     @Override
     @PostMapping("") // api/user
@@ -44,5 +52,12 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
     public Header delete(@PathVariable Long id) {
         log.info("delete id : {}", id);
         return userApiLogicService.delete(id);
+    }
+
+    @GetMapping("")
+    public Header<List<UserApiResponse>> search(@PageableDefault(sort = {"id"}, direction = Sort.Direction.ASC, size = 15) Pageable pageable){
+        log.info("{}", pageable);
+        //System.out.println(pageable);
+        return userApiLogicService.search(pageable);
     }
 }
