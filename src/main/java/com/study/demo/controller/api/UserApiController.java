@@ -4,6 +4,7 @@ import com.study.demo.ifs.CrudInterface;
 import com.study.demo.model.network.Header;
 import com.study.demo.model.network.request.UserApiRequest;
 import com.study.demo.model.network.response.UserApiResponse;
+import com.study.demo.model.network.response.UserOrderInfoApiResponse;
 import com.study.demo.service.UserApiLogicService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,5 +60,12 @@ public class UserApiController implements CrudInterface<UserApiRequest, UserApiR
         log.info("{}", pageable);
         //System.out.println(pageable);
         return userApiLogicService.search(pageable);
+    }
+
+    @GetMapping("/{id}/orderInfo")
+    public Header<UserOrderInfoApiResponse> orderInfo(@PathVariable Long id){
+
+        return userApiLogicService.orderInfo(id);
+
     }
 }

@@ -92,7 +92,7 @@ public class OrderGroupApiLogicService implements CrudInterface<OrderGroupApiReq
         }).orElseGet(()->Header.ERROR("데이터 없음"));
     }
 
-    private Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
+    public Header<OrderGroupApiResponse> response(OrderGroup orderGroup){
 
         OrderGroupApiResponse body = OrderGroupApiResponse.builder()
                 .id(orderGroup.getId())

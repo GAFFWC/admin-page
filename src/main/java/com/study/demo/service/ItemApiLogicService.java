@@ -84,7 +84,7 @@ public class ItemApiLogicService implements CrudInterface<ItemApiRequest, ItemAp
         }).orElseGet(()->Header.ERROR("데이터 업음"));
     }
 
-    private Header<ItemApiResponse> response(Item item) {
+    public Header<ItemApiResponse> response(Item item) {
         ItemApiResponse body = ItemApiResponse.builder()
                 .id(item.getId())
                 .status(item.getStatus())
